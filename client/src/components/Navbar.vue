@@ -3,7 +3,11 @@
     <div :class="$style.title">Trello Clone</div>
 
     <div :class="$style['auth-buttons']">
-      <a :class="$style.button">Log In</a>
+      <router-link
+        :class="$style.button"
+        to="login">
+        Log in
+      </router-link>
       <a :class="[$style.button, $style.primary]">Sign Up</a>
     </div>
   </div>
@@ -37,6 +41,7 @@ export default {
 }
 
 .button {
+  text-decoration: none;
   padding: .7em 1.3em;
   color: #fff;
   background: #0466a3;
