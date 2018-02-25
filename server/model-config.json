@@ -12,5 +12,27 @@
       "../common/mixins",
       "./mixins"
     ]
+  },
+  "User": {
+    "dataSource": "mongo"
+  },
+  "AccessToken": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "mongo",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "mongo",
+    "public": false
   }
 }
