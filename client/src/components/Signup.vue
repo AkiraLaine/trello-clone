@@ -1,19 +1,24 @@
 <template>
   <div :class="$style.component">
     <div :class="$style.card">
-      <h1>Log in to Trello Clone</h1>
-      <span :class="$style.signup">
-        or 
+      <h1>Create a Trello Clone Account</h1>
+      <span :class="$style.login">
+        or
         <router-link
           :class="$style.link"
-          to="signup">
-          create an account  
+          to="login">
+          sign in to your account
         </router-link>
       </span>
 
       <div :class="$style['input-control']">
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="e.g., Hearmione Granger" />
+      </div>
+
+      <div :class="$style['input-control']">
         <label for="email">Email</label>
-        <input type="email" id="email" placeholder="e.g., dana.scully@fbi.gov" />
+        <input type="email" id="email" placeholder="e.g., hermione@spew.org.uk" />
       </div>
 
        <div :class="$style['input-control']">
@@ -21,14 +26,14 @@
         <input type="password" id="password" placeholder="e.g., ●●●●●●●●" />
       </div>
 
-      <a :class="$style.button">Log in</a>
+      <a :class="$style.button">Create New Account</a>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'login'
+  name: 'signup'
 }
 </script>
 
@@ -53,18 +58,18 @@ export default {
   margin-bottom: 10px;
 }
 
-.card .signup {
+.card .login {
   font-size: 18px;
   font-weight: 400;
 }
 
-.card .signup .link {
+.card .login .link {
   text-decoration: underline;
   color: #298fca;
   cursor: pointer;
 }
 
-.card .signup .link:hover {
+.card .login .link:hover {
   color: #0c3953;
 }
 

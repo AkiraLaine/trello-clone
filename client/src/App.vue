@@ -15,7 +15,10 @@ export default {
   },
   computed: {
     showNavbar () {
-      if (this.$route.path !== '/login') {
+      if (
+        this.$route.path !== '/login' &&
+        this.$route.path !== '/signup'
+      ) {
         return true
       }
 
