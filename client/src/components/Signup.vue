@@ -13,27 +13,70 @@
 
       <div :class="$style['input-control']">
         <label for="name">Name</label>
-        <input type="text" id="name" placeholder="e.g., Hearmione Granger" />
+        <input
+          v-model="name"
+          type="text"
+          id="name"
+          placeholder="e.g., Hearmione Granger" />
       </div>
 
       <div :class="$style['input-control']">
         <label for="email">Email</label>
-        <input type="email" id="email" placeholder="e.g., hermione@spew.org.uk" />
+        <input
+          v-model="email"
+          type="email"
+          id="email"
+          placeholder="e.g., hermione@spew.org.uk" />
       </div>
 
        <div :class="$style['input-control']">
         <label for="password">Password</label>
-        <input type="password" id="password" placeholder="e.g., ●●●●●●●●" />
+        <input
+          v-model="password"
+          type="password"
+          id="password"
+          placeholder="e.g., ●●●●●●●●" />
       </div>
 
-      <a :class="$style.button">Create New Account</a>
+      <a 
+        :class="$style.button"
+        @click="signup()">
+        Create New Account
+      </a>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+import { mapMutations } from 'vuex'
+
 export default {
-  name: 'signup'
+  name: 'signup',
+  data () {
+    return {
+      name: '',
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    ...mapMutations({
+      setUserData: 'user/setUserData'
+    }),
+    signup () {
+      const payload = {
+        username: this.name.trim(),
+        email: this.email,
+        password: this.password
+      }
+
+      axios.post('/api/Users', payload)
+        .then(res => {
+          this.setUserData(res.data)
+        })
+    }
+  }
 }
 </script>
 
