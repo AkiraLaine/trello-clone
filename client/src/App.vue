@@ -1,28 +1,44 @@
 <template>
   <div id="app">
-    <navbar v-if="showNavbar" />
-    <router-view></router-view>
+    <template v-if="!isAuthenticated">
+      <component :is="loggedOutView" />
+    </template>
+    <router-view v-else></router-view>
   </div>
 </template>
 
 <script>
-import Navbar from '@/components/Navbar'
+import Landing from '@/components/Landing';
+import Signup from '@/components/Signup';
+import Login from '@/components/Login'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'trello-clone',
   components: {
-    Navbar
+    Landing,
+    Signup,
+    Login
+  },
+  created () {
+    const pathname = window.location.pathname
+
+    if (!this.isAuthenticated && pathname !== '/') {
+      this.setLoggedOutView(pathname.substr(1, pathname.length))
+      window.history.pushState('', '', `${pathname}`)
+    }
+  },
+  methods: {
+    ...mapMutations({
+      setLoggedOutView: 'platform/setLoggedOutView'
+    })
   },
   computed: {
-    showNavbar () {
-      if (
-        this.$route.path !== '/login' &&
-        this.$route.path !== '/signup'
-      ) {
-        return true
-      }
-
-      return false
+    ...mapState({
+      loggedOutView: state => state.platform.loggedOutView
+    }),
+    isAuthenticated () {
+      return JSON.parse(window.localStorage.getItem('isAuth')) 
     }
   }
 }

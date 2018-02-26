@@ -1,13 +1,3 @@
-import Login from '@/components/Login'
-import Signup from '@/components/Signup'
+// const isAuthenticated = () => JSON.parse(window.localStorage.getItem('isAuth'))
 
-export default [
-  {
-    path: '/login',
-    component: Login
-  },
-  {
-    path: '/signup',
-    component: Signup
-  }
-]
+export default []

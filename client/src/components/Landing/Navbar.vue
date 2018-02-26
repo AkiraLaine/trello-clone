@@ -3,19 +3,22 @@
     <div :class="$style.title">Trello Clone</div>
 
     <div :class="$style['auth-buttons']">
-      <router-link
-        :class="$style.button"
-        to="login">
-        Log in
-      </router-link>
-      <a :class="[$style.button, $style.primary]">Sign Up</a>
+      <a @click="setLoggedOutView('Login')" :class="$style.button">Log in</a>
+      <a @click="setLoggedOutView('Signup')" :class="[$style.button, $style.primary]">Sign Up</a>
     </div>
   </div>
 </template>
 
 <script>
-export default {
+import { mapMutations } from 'vuex'
 
+export default {
+  name: 'navbar',
+  methods: {
+    ...mapMutations({
+      setLoggedOutView: 'platform/setLoggedOutView'
+    })
+  }
 }
 </script>
 
