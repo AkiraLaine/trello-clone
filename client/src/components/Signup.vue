@@ -74,7 +74,7 @@ export default {
       axios.post('/api/Users', payload)
         .then(res => {
           this.setUserData(res.data)
-          this.$router.push('')
+          this.$router.push('/')
         })
     }
   }

@@ -3,14 +3,14 @@
 </template>
 
 <script>
-import Login from '@/components/Login'
+import Dashboard from '@/components/Dashboard'
 import Landing from '@/components/Landing'
 
 export default {
   name: 'home',
   components: {
-    Landing,
-    Login
+    Dashboard,
+    Landing
   },
   computed: {
     componentToRender () {
@@ -18,7 +18,7 @@ export default {
         return 'Landing'
       }
 
-      return 'Login'
+      return 'Dashboard'
     }
   }
 }

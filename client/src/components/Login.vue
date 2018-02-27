@@ -13,22 +13,59 @@
 
       <div :class="$style['input-control']">
         <label for="email">Email</label>
-        <input type="email" id="email" placeholder="e.g., dana.scully@fbi.gov" />
+        <input
+          v-model="email"
+          type="email" 
+          id="email" 
+          placeholder="e.g., dana.scully@fbi.gov" />
       </div>
 
        <div :class="$style['input-control']">
         <label for="password">Password</label>
-        <input type="password" id="password" placeholder="e.g., ●●●●●●●●" />
+        <input
+          v-model="password"
+          type="password" 
+          id="password" 
+          placeholder="e.g., ●●●●●●●●" />
       </div>
 
-      <a :class="$style.button">Log in</a>
+      <a
+        @click="login()" 
+        :class="$style.button">
+        Log in
+      </a>
     </div>
   </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
-  name: 'login'
+  name: 'login',
+  data () {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    ...mapMutations({
+      'setUserData': 'user/setUserData'
+    }),
+    login () {
+      const payload = {
+        email: this.email,
+        password: this.password
+      }
+
+      this.$http.post('/api/Users/login', payload)
+        .then(res =>  {
+          this.setUserData(res.data)
+          this.$router.push('/')
+        })
+    }
+  }
 }
 </script>
 
