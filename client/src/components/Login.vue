@@ -4,11 +4,11 @@
       <h1>Log in to Trello Clone</h1>
       <span :class="$style.signup">
         or 
-        <a
-          @click="setLoggedOutView('Signup')"
+        <router-link
+          to="signup"
           :class="$style.link">
           create an account  
-        </a>
+        </router-link>
       </span>
 
       <div :class="$style['input-control']">
@@ -27,18 +27,8 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
-
 export default {
-  name: 'login',
-  created () {
-    window.history.pushState('', '', '/login')
-  },
-  methods: {
-    ...mapMutations({
-      setLoggedOutView: 'platform/setLoggedOutView'
-    })
-  }
+  name: 'login'
 }
 </script>
 

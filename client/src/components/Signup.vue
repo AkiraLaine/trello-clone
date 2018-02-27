@@ -4,11 +4,11 @@
       <h1>Create a Trello Clone Account</h1>
       <span :class="$style.login">
         or
-        <a
-          @click="setLoggedOutView('Login')"
+        <router-link
+          to="login"
           :class="$style.link">
           sign in to your account
-        </a>
+        </router-link>
       </span>
 
       <div :class="$style['input-control']">
@@ -60,13 +60,9 @@ export default {
       password: ''
     }
   },
-  created () {
-    window.history.pushState('', '', '/signup')
-  },
   methods: {
     ...mapMutations({
-      setUserData: 'user/setUserData',
-      setLoggedOutView: 'platform/setLoggedOutView'
+      setUserData: 'user/setUserData'
     }),
     signup () {
       const payload = {
@@ -78,7 +74,7 @@ export default {
       axios.post('/api/Users', payload)
         .then(res => {
           this.setUserData(res.data)
-          this.$router.push('/')
+          this.$router.push('')
         })
     }
   }
