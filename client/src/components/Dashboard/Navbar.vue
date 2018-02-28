@@ -1,6 +1,10 @@
 <template>
   <div :class="$style.component">
-    <div :class="$style.title">Trello Clone</div>
+    <router-link
+      to="/"
+      :class="$style.title">
+      Trello Clone
+    </router-link>
   </div>
 </template>
 
@@ -26,6 +30,8 @@ export default {
 .title {
   cursor: pointer;
   opacity: 0.5;
+  text-decoration: none;
+  color: #fff;
 }
 
 .title:hover {
