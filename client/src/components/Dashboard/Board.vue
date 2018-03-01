@@ -4,7 +4,9 @@
     :style="{
       'background-color': board.backgroundColor
     }">
-    {{ board.name }}
+    <div :class="$style.name">
+      {{ board.name }}
+    </div>
   </div>
 </template>
 
@@ -25,9 +27,31 @@ export default {
   width: 25%;
   height: 95px;
   box-sizing: border-box;
-  padding: 0 8px 8px 0;
+  padding: 8px;
   border-radius: 3px;
   cursor: pointer;
   margin-right: 15px;
+  position: relative;
+}
+
+.component::after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0;
+}
+
+.component:hover::after {
+  opacity: 0.1;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
 }
 </style>
