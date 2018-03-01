@@ -59,7 +59,7 @@ export default {
         password: this.password
       }
 
-      this.$http.post('/api/Users/login', payload)
+      this.$http.post('/api/users/login', payload)
         .then(res =>  {
           this.setUserData(res.data)
           this.$router.push('/')

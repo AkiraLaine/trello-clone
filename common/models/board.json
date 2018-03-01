@@ -1,6 +1,6 @@
 {
-  "name": "Board",
-  "plural": "Boards",
+  "name": "board",
+  "plural": "boards",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -11,23 +11,26 @@
       "type": "string",
       "required": true
     },
-    "background": {
+    "backgroundColor": {
       "type": "string",
       "required": true
     },
-    "lists": {
+    "cards": {
       "type": [
         "object"
       ],
-      "required": true
-    },
-    "userId": {
-      "type": "string",
-      "required": true
+      "required": false,
+      "default": []
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    }
+  },
   "acls": [],
   "methods": {}
 }

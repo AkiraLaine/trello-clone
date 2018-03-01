@@ -71,7 +71,7 @@ export default {
         password: this.password
       }
 
-      axios.post('/api/Users', payload)
+      axios.post('/api/users', payload)
         .then(res => {
           this.setUserData(res.data)
           this.$router.push('/')

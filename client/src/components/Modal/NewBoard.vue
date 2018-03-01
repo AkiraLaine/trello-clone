@@ -6,22 +6,55 @@
       x
     </div>
     <input
+      v-model="name"
       :class="$style.input"
       type="text"
       placeholder="Add board title">
-      <button :class="$style.button">Create Board</button>
+      <button
+        @click="submit()"
+        :class="$style.button">
+        Create Board
+      </button>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'new-board',
+  data () {
+    return {
+      name: '',
+      backgroundColor: '#0079bf'
+    }
+  },
+  computed: {
+    ...mapState({
+      user: state => state.user.data
+    }),
+    userId () {
+      return this.user.email ? this.user.id : this.user.userId
+    }
+  },
   methods: {
     ...mapActions({
-      'closeModal': 'platform/closeModal'
-    })
+      closeModal: 'platform/closeModal',
+      createBoard: 'platform/createBoard'
+    }),
+    submit () {
+      const payload = {
+        name: this.name,
+        backgroundColor: this.backgroundColor,
+        userId: this.userId
+      }
+
+      this.$http.post('/api/boards', payload)
+        .then(res => {
+          this.closeModal()
+          this.createBoard(res.data)
+        })
+    }
   }
 }
 </script>

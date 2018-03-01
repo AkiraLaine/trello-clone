@@ -1,7 +1,11 @@
 <template>
   <div :class="$style.component">
     <div :class="$style.header">Personal Boards</div>
-    <div :class="$style.container">
+    <div :class="$style['board-container']">
+      <board 
+        v-for="board in boards"
+        :key="board.id"
+        :board="board" />
       <div
         @click="createNewBoard()" 
         :class="[$style.board, $style.newBoard]">
@@ -12,10 +16,19 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
+import Board from '@/components/Dashboard/Board'
 
 export default {
   name: 'board-container',
+  components: {
+    Board
+  },
+  computed: {
+    ...mapState({
+      boards: state => state.platform.boards
+    })
+  },
   methods: {
     ...mapActions({
       openModal: 'platform/openModal'
