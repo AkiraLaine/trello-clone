@@ -1,0 +1,33 @@
+{
+  "name": "Board",
+  "plural": "Boards",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "background": {
+      "type": "string",
+      "required": true
+    },
+    "lists": {
+      "type": [
+        "object"
+      ],
+      "required": true
+    },
+    "userId": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
