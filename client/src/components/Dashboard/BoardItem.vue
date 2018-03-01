@@ -1,5 +1,7 @@
 <template>
-  <div 
+  <router-link
+    :to="{ name: 'board', params: { boardId: board.uid, boardName } }"
+    tag="div"
     :class="$style.component"
     :style="{
       'background-color': board.backgroundColor
@@ -7,7 +9,7 @@
     <div :class="$style.name">
       {{ board.name }}
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -17,6 +19,15 @@ export default {
     board: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    boardName () {
+      return this.board.name
+        .replace(/[^a-zA-Z\d\s]/g, '')
+        .replace(/\s\s+/g, ' ')
+        .replace(/\s/g, '-')
+        .toLowerCase()
     }
   }
 }
