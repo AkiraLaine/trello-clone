@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'board',
+  name: 'board-item',
   props: {
     board: {
       type: Object,

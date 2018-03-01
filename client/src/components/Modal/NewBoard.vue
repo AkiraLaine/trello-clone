@@ -12,7 +12,7 @@
       placeholder="Add board title">
       <button
         @click="submit()"
-        :class="$style.button">
+        :class="[$style.button, !name.trim().length ? $style.disabled : '']">
         Create Board
       </button>
   </div>
@@ -46,14 +46,20 @@ export default {
       const payload = {
         name: this.name,
         backgroundColor: this.backgroundColor,
-        userId: this.userId
+        userId: this.userId,
+        uid: this.generateUID()
       }
 
-      this.$http.post('/api/boards', payload)
-        .then(res => {
-          this.closeModal()
-          this.createBoard(res.data)
-        })
+      if (this.name.trim().length) {
+        this.$http.post('/api/boards', payload)
+          .then(res => {
+            this.closeModal()
+            this.createBoard(res.data)
+          })
+      }
+    },
+    generateUID () {
+      return Math.random().toString(36).substr(2, 8).toUpperCase();
     }
   }
 }
@@ -116,5 +122,11 @@ export default {
 
 .button:hover {
   background: #519839 100%;
+}
+
+.disabled {
+  color: #b6bbbf;
+  background: #f8f9f9;
+  pointer-events: none;
 }
 </style>

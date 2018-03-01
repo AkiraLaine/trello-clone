@@ -21,6 +21,10 @@
       ],
       "required": false,
       "default": []
+    },
+    "uid": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],

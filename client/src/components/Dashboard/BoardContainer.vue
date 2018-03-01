@@ -2,7 +2,7 @@
   <div :class="$style.component">
     <div :class="$style.header">Personal Boards</div>
     <div :class="$style['board-container']">
-      <board 
+      <board-item
         v-for="board in boards"
         :key="board.id"
         :board="board" />
@@ -17,12 +17,12 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import Board from '@/components/Dashboard/Board'
+import BoardItem from '@/components/Dashboard/BoardItem'
 
 export default {
   name: 'board-container',
   components: {
-    Board
+    BoardItem
   },
   computed: {
     ...mapState({
