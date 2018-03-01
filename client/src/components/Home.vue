@@ -14,7 +14,9 @@ export default {
   },
   computed: {
     componentToRender () {
-      if (!JSON.parse(window.localStorage.getItem('isAuth'))) {
+      const user = JSON.parse(window.localStorage.getItem('user')) || {}
+
+      if (!Object.keys(user).length) {
         return 'Landing'
       }
 

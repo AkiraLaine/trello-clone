@@ -6,7 +6,7 @@ export default {
   mutations: {
     setUserData (state, data) {
       state.data = data
-      window.localStorage.setItem('isAuth', true)
+      window.localStorage.setItem('user', JSON.stringify(data))
     } 
   }
 }
