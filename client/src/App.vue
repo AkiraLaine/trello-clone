@@ -1,12 +1,18 @@
 <template>
   <div id="app">
+    <modal />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import Modal from '@/components/Modal'
+
 export default {
-  name: 'trello-clone'
+  name: 'trello-clone',
+  components: {
+    Modal
+  }
 }
 </script>
 

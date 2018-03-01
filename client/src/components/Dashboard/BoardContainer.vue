@@ -2,7 +2,9 @@
   <div :class="$style.component">
     <div :class="$style.header">Personal Boards</div>
     <div :class="$style.container">
-      <div :class="[$style.board, $style.newBoard]">
+      <div
+        @click="createNewBoard()" 
+        :class="[$style.board, $style.newBoard]">
         Create new board...
       </div>
     </div>
@@ -10,8 +12,18 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
-  name: 'board-container'
+  name: 'board-container',
+  methods: {
+    ...mapActions({
+      openModal: 'platform/openModal'
+    }),
+    createNewBoard () {
+      this.openModal('NewBoard')
+    }
+  }
 }
 </script>
 
