@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="board"
     :class="$style.component"
     :style="{ 'background-color': board.backgroundColor }">
     <navbar />
