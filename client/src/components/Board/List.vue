@@ -2,6 +2,14 @@
   <div :class="$style.component">
     <div :class="$style.header">To Do</div>
     <div
+      v-if="cards.length"
+      :class="$style['card-container']">
+      <card
+        v-for="(card, index) in cards"
+        :key="index"
+        :card="card" />
+    </div>
+    <div
       v-show="!showAddCard" 
       :class="$style['add-text']"
       @click="toggleAddCard()">
@@ -11,10 +19,15 @@
       v-show="showAddCard"
       :class="$style['add-content']">
       <textarea
+        v-model="cardContent"
         :class="$style.textarea"
         ref="textarea">
       </textarea>
-      <button :class="$style.button">Add</button>
+      <button
+        :class="$style.button"
+        @click="addCard()">
+        Add
+      </button>
       <div
         :class="$style.close"
         @click="toggleAddCard()">
@@ -25,11 +38,18 @@
 </template>
 
 <script>
+import Card from '@/components/Board/Card'
+
 export default {
   name: 'list',
+  components: {
+    Card
+  },
   data () {
     return {
-      showAddCard: false
+      showAddCard: false,
+      cards: [],
+      cardContent: ''
     }
   },
   methods: {
@@ -41,6 +61,10 @@ export default {
           this.$refs.textarea.focus()
         }, 0)
       }
+    },
+    addCard () {
+      this.cards.push(this.cardContent)
+      this.cardContent = ''
     }
   }
 }
@@ -78,7 +102,7 @@ export default {
 }
 
 .add-content {
-  padding: 8px 10px;
+  padding: 0px 10px 8px 10px;
 }
 
 .textarea {
@@ -125,5 +149,10 @@ export default {
 
 .close:hover {
   color: #4d4d4d;
+}
+
+.card-container {
+  padding: 8px 10px 0 10px;
+  margin-bottom: 5px;
 }
 </style>
