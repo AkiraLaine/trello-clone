@@ -24,9 +24,14 @@ export default {
   border-radius: 3px;
   cursor: pointer;
   font-size: 14px;
+  margin-bottom: 7px;
 }
 
 .component:hover {
   background-color: #edeff0;
+}
+
+.component:last-child {
+  margin-bottom: 2px;
 }
 </style>
