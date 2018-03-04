@@ -69,8 +69,10 @@ export default {
       }
     },
     addCard () {
-      this.cards.push(this.cardContent)
-      this.cardContent = ''
+      if (this.cardContent.trim().length) {
+        this.cards.push(this.cardContent)
+        this.cardContent = ''
+      }
     }
   }
 }
