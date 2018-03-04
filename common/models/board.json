@@ -22,6 +22,26 @@
       "required": false,
       "default": []
     },
+    "lists": {
+      "type": [
+        "object"
+      ],
+      "required": false,
+      "default": [
+        {
+          "name": "To Do",
+          "id": 1
+        },
+        {
+          "name": "Doing",
+          "id": 2
+        },
+        {
+          "name": "Done",
+          "id": 3
+        }
+      ]
+    },
     "uid": {
       "type": "string",
       "required": true

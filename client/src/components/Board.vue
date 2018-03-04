@@ -6,7 +6,7 @@
     <navbar />
     <div :class="$style.container">
       <div :class="$style.name">{{ board.name }}</div>
-      <list-container />
+      <list-container :lists="board.lists" />
     </div>
   </div>
 </template>

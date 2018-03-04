@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.component">
-    <div :class="$style.header">To Do</div>
+    <div :class="$style.header">{{ list.name }}</div>
     <div
       v-if="cards.length"
       :class="$style['card-container']">
@@ -45,6 +45,12 @@ export default {
   components: {
     Card
   },
+  props: {
+    list: {
+      type: Object,
+      required: true
+    }
+  },
   data () {
     return {
       showAddCard: false,
@@ -77,6 +83,7 @@ export default {
   display: flex;
   flex-direction: column;
   width: 270px;
+  margin-right: 10px;
 }
 
 .header {

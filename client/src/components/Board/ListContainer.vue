@@ -1,6 +1,9 @@
 <template>
   <div :class="$style.component">
-    <list />
+    <list 
+      v-for="list in lists"
+      :key="list.id"
+      :list="list" />
   </div>
 </template>
 
@@ -11,6 +14,12 @@ export default {
   name: 'list-container',
   components: {
     List
+  },
+  props: {
+    lists: {
+      type: Array,
+      required: true
+    }
   }
 }
 </script>
@@ -21,5 +30,6 @@ export default {
   height: 100%;
   width: 100%;
   display: flex;
+  align-items: flex-start;
 }
 </style>
