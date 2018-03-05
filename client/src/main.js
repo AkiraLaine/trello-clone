@@ -11,7 +11,7 @@ Vue.use(VueRouter)
 
 axios.defaults.baseURL = 'http://localhost:3000'
 
-Vue.prototype.$http = axios
+Vue.prototype.$http = Vue.$http = axios
 
 const router = new VueRouter({
   routes,

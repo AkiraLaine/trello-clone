@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations, mapActions } from 'vuex'
 
 export default {
   name: 'login',
@@ -51,7 +51,10 @@ export default {
   },
   methods: {
     ...mapMutations({
-      'setUserData': 'user/setUserData'
+      setUserData: 'user/setUserData'
+    }),
+    ...mapActions({
+      fetchUserBoards: 'platform/fetchUserBoards'
     }),
     login () {
       const payload = {
@@ -63,6 +66,7 @@ export default {
         .then(res =>  {
           this.setUserData(res.data)
           this.$router.push('/')
+          this.fetchUserBoards()
         })
     }
   }

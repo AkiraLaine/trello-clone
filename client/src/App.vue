@@ -19,11 +19,7 @@ export default {
     
     if (Object.keys(user).length) {
       this.setUserData(user)
-
-      this.$http.get(`/api/boards?filter[where][userId]=${this.userId}`)
-        .then(res => {
-          this.initBoards(res.data)
-        })
+      this.fetchUserBoards()
     }
   },
   methods: {
@@ -31,7 +27,8 @@ export default {
       setUserData: 'user/setUserData'
     }),
     ...mapActions({
-      initBoards: 'platform/initBoards'
+      initBoards: 'platform/initBoards',
+      fetchUserBoards: 'platform/fetchUserBoards'
     })
   },
   computed: {

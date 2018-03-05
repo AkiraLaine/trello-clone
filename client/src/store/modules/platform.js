@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 export default {
   namespaced: true,
   state: {
@@ -31,6 +33,14 @@ export default {
     },
     initBoards ({ commit }, data) {
       commit('setBoards', data)
+    },
+    fetchUserBoards ({ commit, rootState }) {
+      const userId = rootState.user.data.email ? rootState.user.data.id : rootState.user.data.userId
+
+      Vue.$http.get(`/api/boards?filter[where][userId]=${userId}`)
+        .then(res => {
+          commit('setBoards', res.data)
+        })
     }
   }
 }
