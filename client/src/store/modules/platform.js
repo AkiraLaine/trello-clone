@@ -13,6 +13,10 @@ export default {
     },
     setBoards (state, data) {
       state.boards = data
+    },
+    updateBoard (state, data) {
+      const index = state.boards.findIndex(b => b.uid === data.uid)
+      state.boards.splice(index, 1, data)
     }
   },
   actions: {

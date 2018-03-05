@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.component">
-    {{ card }}
+    {{ card.text }}
   </div>
 </template>
 
@@ -9,7 +9,7 @@ export default {
   name: 'card',
   props: {
     card: {
-      type: String,
+      type: Object,
       required: true
     }
   }

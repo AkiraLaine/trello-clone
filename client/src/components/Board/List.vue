@@ -39,6 +39,7 @@
 
 <script>
 import Card from '@/components/Board/Card'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'list',
@@ -54,11 +55,24 @@ export default {
   data () {
     return {
       showAddCard: false,
-      cards: [],
       cardContent: ''
     }
   },
+  computed: {
+    ...mapState({
+      boards: state => state.platform.boards
+    }),
+    board () {
+      return this.boards.find(b => b.uid === this.$route.params.boardId)
+    },
+    cards () {
+      return this.board.cards.filter(card => card.listId === this.list.id)
+    }
+  },
   methods: {
+    ...mapMutations({
+      updateBoard: 'platform/updateBoard'
+    }),
     toggleAddCard () {
       this.showAddCard = !this.showAddCard
 
@@ -70,9 +84,23 @@ export default {
     },
     addCard () {
       if (this.cardContent.trim().length) {
-        this.cards.push(this.cardContent)
+        const payload = {
+          cards: [...this.board.cards, {
+            text: this.cardContent,
+            uid: this.generateUID(),
+            listId: this.list.id
+          }]
+        }
+
+        this.$http.patch(`/api/boards/${this.board.id}`, payload)
+          .then(res => {
+            this.updateBoard(res.data)
+          })
         this.cardContent = ''
       }
+    },
+    generateUID () {
+      return Math.random().toString(36).substr(2, 8)
     }
   }
 }
