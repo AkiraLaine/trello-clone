@@ -49,7 +49,7 @@
 
 <script>
 import axios from 'axios'
-import { mapMutations, mapActions } from 'vuex'
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'signup',

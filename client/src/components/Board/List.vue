@@ -1,6 +1,8 @@
 <template>
   <div :class="$style.component">
-    <div :class="$style.header">{{ list.name }}</div>
+    <div
+      class="handle"
+      :class="$style.header">{{ list.name }}</div>
     <div
       v-if="cards.length"
       :class="$style['card-container']">
@@ -123,6 +125,7 @@ export default {
   color: #333;
   box-sizing: border-box;
   height: 35px;
+  cursor: pointer;
 }
 
 .add-text {
