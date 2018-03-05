@@ -57,15 +57,17 @@ export default {
 .board-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .board {
-  width: 25%;
+  width: 24%;
   height: 95px;
   box-sizing: border-box;
   padding: 0 8px 8px 0;
   border-radius: 3px;
   cursor: pointer;
+  margin-bottom: 10px;
 }
 
 .newBoard {

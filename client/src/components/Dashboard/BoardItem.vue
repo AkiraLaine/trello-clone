@@ -35,14 +35,14 @@ export default {
 
 <style module>
 .component {
-  width: 25%;
+  width: 24%;
   height: 95px;
   box-sizing: border-box;
   padding: 8px;
   border-radius: 3px;
   cursor: pointer;
-  margin-right: 15px;
   position: relative;
+  margin-bottom: 10px;
 }
 
 .component::after {
