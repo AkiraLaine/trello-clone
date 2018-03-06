@@ -15,13 +15,6 @@
       "type": "string",
       "required": true
     },
-    "cards": {
-      "type": [
-        "object"
-      ],
-      "required": false,
-      "default": []
-    },
     "lists": {
       "type": [
         "object"
@@ -30,15 +23,18 @@
       "default": [
         {
           "name": "To Do",
-          "id": 1
+          "id": 1,
+          "cards": []
         },
         {
           "name": "Doing",
-          "id": 2
+          "id": 2,
+          "cards": []
         },
         {
           "name": "Done",
-          "id": 3
+          "id": 3,
+          "cards": []
         }
       ]
     },

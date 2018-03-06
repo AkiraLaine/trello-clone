@@ -47,7 +47,7 @@ export default {
         name: this.name,
         backgroundColor: this.backgroundColor,
         userId: this.userId,
-        uid: this.generateUID()
+        uid: this.generateUID(),
       }
 
       if (this.name.trim().length) {

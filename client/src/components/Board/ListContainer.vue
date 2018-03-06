@@ -1,14 +1,14 @@
 <template>
   <div :class="$style.component">
     <draggable 
-      v-model="localLists"
+      :list="lists"
       :options="{
         ghostClass: $style.ghost,
         handle: '.handle'
       }"
       :class="$style.container">
       <list 
-        v-for="list in localLists"
+        v-for="list in lists"
         :key="list.id"
         :list="list" />
     </draggable>
@@ -29,11 +29,6 @@ export default {
     lists: {
       type: Array,
       required: true
-    }
-  },
-  data () {
-    return {
-      localLists: this.lists
     }
   }
 }

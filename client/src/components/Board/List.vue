@@ -68,7 +68,7 @@ export default {
       return this.boards.find(b => b.uid === this.$route.params.boardId)
     },
     cards () {
-      return this.board.cards.filter(card => card.listId === this.list.id)
+      return this.list.cards
     }
   },
   methods: {
@@ -86,16 +86,21 @@ export default {
     },
     addCard () {
       if (this.cardContent.trim().length) {
-        const payload = {
-          cards: [...this.board.cards, {
-            text: this.cardContent,
-            uid: this.generateUID(),
-            listId: this.list.id
-          }]
-        }
+        const cards = [...this.cards, {
+          text: this.cardContent,
+          uid: this.generateUID()
+        }]
 
-        this.$http.patch(`/api/boards/${this.board.id}`, payload)
+        const newList = Object.assign({}, this.list, { cards })
+
+        const listIndex = this.board.lists.findIndex(l => l.id === this.list.id) 
+
+        const newListArray = this.board.lists.slice()
+        newListArray.splice(listIndex, 1, newList)
+
+        this.$http.patch(`/api/boards/${this.board.id}`, { lists: newListArray })
           .then(res => {
+            console.log(res)
             this.updateBoard(res.data)
           })
         this.cardContent = ''
