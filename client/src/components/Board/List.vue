@@ -11,7 +11,7 @@
     </div>
     <draggable
       ref="draggable"
-      :list="cards"
+      v-model="cards"
       :options="{
         ghostClass: $style.ghost,
         group: 'cards'
@@ -70,7 +70,8 @@ export default {
   data () {
     return {
       showAddCard: false,
-      cardContent: ''
+      cardContent: '',
+      newCards: this.list.cards
     }
   },
   computed: {
@@ -80,8 +81,21 @@ export default {
     board () {
       return this.boards.find(b => b.uid === this.$route.params.boardId)
     },
-    cards () {
-      return this.list.cards
+    cards: {
+      get () {
+        return this.newCards
+      },
+      set (data) {
+        this.newCards = data
+        
+        const lists = this.board.lists.slice()
+        lists.find(l => l.id === this.list.id).cards = data
+
+        this.$http.patch(`/api/boards/${this.board.id}`, { lists })
+          .then(res => {
+            console.log(res)
+          })
+      }
     }
   },
   methods: {
