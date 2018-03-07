@@ -1,14 +1,14 @@
 <template>
   <div :class="$style.component">
     <draggable 
-      :list="lists"
+      v-model="localLists"
       :options="{
         ghostClass: $style.ghost,
         handle: '.handle'
       }"
       :class="$style.container">
       <list 
-        v-for="list in lists"
+        v-for="list in localLists"
         :key="list.id"
         :list="list" />
     </draggable>
@@ -18,6 +18,7 @@
 <script>
 import Draggable from 'vuedraggable'
 import List from '@/components/Board/List'
+import { mapState } from 'vuex'
 
 export default {
   name: 'list-container',
@@ -29,6 +30,32 @@ export default {
     lists: {
       type: Array,
       required: true
+    }
+  },
+  data () {
+    return {
+      newLists: this.lists
+    }
+  },
+  computed: {
+    ...mapState({
+      boards: state => state.platform.boards
+    }),
+    board () {
+      return this.boards.find(b => b.uid === this.$route.params.boardId)
+    },
+    localLists: {
+      get () {
+        return this.newLists
+      },
+      set (data) {
+        this.newLists = data
+
+        this.$http.patch(`/api/boards/${this.board.id}`, { lists: this.newLists })
+          .then(res => {
+            console.log(res)
+          })
+      }
     }
   }
 }
