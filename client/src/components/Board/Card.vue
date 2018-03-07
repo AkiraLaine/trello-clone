@@ -25,6 +25,7 @@ export default {
   cursor: pointer;
   font-size: 14px;
   margin-bottom: 7px;
+  position: relative;
 }
 
 .component:hover {

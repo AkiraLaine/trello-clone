@@ -1,16 +1,27 @@
 <template>
-  <div :class="$style.component">
+  <div 
+    :class="[
+      $style.component,
+      !cards.length ? $style.slim : ''
+    ]">
     <div
       class="handle"
-      :class="$style.header">{{ list.name }}</div>
-    <div
-      v-if="cards.length"
+      :class="$style.header">
+      {{ list.name }}
+    </div>
+    <draggable
+      ref="draggable"
+      :list="cards"
+      :options="{
+        ghostClass: $style.ghost,
+        group: 'cards'
+      }"
       :class="$style['card-container']">
       <card
         v-for="(card, index) in cards"
         :key="index"
         :card="card" />
-    </div>
+    </draggable>
     <div
       v-show="!showAddCard" 
       :class="$style['add-text']"
@@ -41,12 +52,14 @@
 
 <script>
 import Card from '@/components/Board/Card'
+import Draggable from 'vuedraggable'
 import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'list',
   components: {
-    Card
+    Card,
+    Draggable
   },
   props: {
     list: {
@@ -197,7 +210,26 @@ export default {
 }
 
 .card-container {
-  padding: 8px 10px 0 10px;
+  padding: 2px 10px 0;
   margin-bottom: 5px;
+}
+
+.ghost::after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #ccc;
+}
+
+.slim .header {
+  height: 23px;
+}
+
+.slim .card-container {
+  padding: 8px 10px 0;
 }
 </style>
