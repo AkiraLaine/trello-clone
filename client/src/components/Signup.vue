@@ -38,7 +38,7 @@
           placeholder="e.g., ●●●●●●●●" />
       </div>
 
-      <a 
+      <a
         :class="$style.button"
         @click="signup()">
         Create New Account
@@ -48,7 +48,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { mapMutations } from 'vuex'
 
 export default {
@@ -71,7 +70,7 @@ export default {
         password: this.password
       }
 
-      axios.post('/api/users', payload)
+      this.$http.post('/api/users', payload)
         .then(res => {
           this.setUserData(res.data)
           this.$router.push('/')
