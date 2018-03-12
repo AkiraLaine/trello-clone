@@ -1,5 +1,5 @@
 <template>
-  <div 
+  <div
     :class="[
       $style.component,
       !cards.length ? $style.slim : ''
@@ -23,7 +23,7 @@
         :card="card" />
     </draggable>
     <div
-      v-show="!showAddCard" 
+      v-show="!showAddCard"
       :class="$style['add-text']"
       @click="toggleAddCard()">
       Add a card...
@@ -74,6 +74,11 @@ export default {
       newCards: this.list.cards
     }
   },
+  watch: {
+    list () {
+      this.newCards = this.list.cards
+    }
+  },
   computed: {
     ...mapState({
       boards: state => state.platform.boards
@@ -87,7 +92,7 @@ export default {
       },
       set (data) {
         this.newCards = data
-        
+
         const lists = this.board.lists.slice()
         lists.find(l => l.id === this.list.id).cards = data
 
@@ -120,7 +125,7 @@ export default {
 
         const newList = Object.assign({}, this.list, { cards })
 
-        const listIndex = this.board.lists.findIndex(l => l.id === this.list.id) 
+        const listIndex = this.board.lists.findIndex(l => l.id === this.list.id)
 
         const newListArray = this.board.lists.slice()
         newListArray.splice(listIndex, 1, newList)

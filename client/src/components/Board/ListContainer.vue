@@ -37,6 +37,11 @@ export default {
       newLists: this.lists
     }
   },
+  watch: {
+    lists () {
+      this.newLists = this.lists
+    }
+  },
   computed: {
     ...mapState({
       boards: state => state.platform.boards
