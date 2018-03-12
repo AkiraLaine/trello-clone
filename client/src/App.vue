@@ -16,7 +16,7 @@ export default {
   },
   created () {
     const user = JSON.parse(window.localStorage.getItem('user')) || {}
-    
+
     if (Object.keys(user).length) {
       this.setUserData(user)
       this.fetchUserBoards()
@@ -48,5 +48,9 @@ export default {
   padding: 0;
   font-family: "Helvetica Neue";
   box-sizing: border-box;
+}
+
+.list-ghost .Card_component__3Tm7b_0 {
+  background: none !important;
 }
 </style>

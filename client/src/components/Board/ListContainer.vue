@@ -3,14 +3,15 @@
     <draggable
       v-model="localLists"
       :options="{
-        ghostClass: $style.ghost,
+        ghostClass: 'list-ghost',
         handle: '.handle'
       }"
       :class="$style.container">
       <list
         v-for="list in localLists"
         :key="list.id"
-        :list="list" />
+        :list="list"
+        :class="$style.list" />
     </draggable>
   </div>
 </template>
@@ -77,16 +78,18 @@ export default {
   display: flex;
   align-items: flex-start;
 }
+</style>
 
-.ghost {
+<style>
+.list-ghost {
   position: relative;
-  background: none;
+  background: none !important;
   text-indent: 100%;
   white-space: nowrap;
   overflow: hidden;
 }
 
-.ghost::after {
+.list-ghost::after {
   content: '';
   position: absolute;
   top: 0;
@@ -94,6 +97,6 @@ export default {
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.2);
-  z-index: 10;
 }
 </style>
+
